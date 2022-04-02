@@ -1,32 +1,63 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div id="App">
+    <header class="header">
+      <h1>My personal coasts</h1>
+    </header>
+    <ButtonV 
+    msg="Show paymentform"
+    @watch="handleShow"
+    />
+    <template v-if="show">
+    <payment-form @add="onDataAdded" />
+    </template>
+    <paymentsList :items="paymentsList" />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import ButtonV from "./components/ButtonV.vue"
+import paymentsList from "./components/PaymentsList.vue";
+import PaymentForm from "./components/PaymentForm.vue";
+export default {
+  name: "#App",
+  components: {
+    paymentsList,
+    PaymentForm,
+    ButtonV,
+  },
+  data() {
+    return {
+      show: false,
+      paymentsList: [
+        {
+          date: "08.02.22",
+          category: "Education",
+          price: 123,
+        },
+        {
+          date: "10.02.22",
+          category: "Sport",
+          price: 325,
+        },
+        {
+          date: "13.03.22",
+          category: "Learning",
+          price: 900,
+        },
+      ],
+    };
+  },
+  methods: {
+    onDataAdded(data) {
+      console.log(data);
+      this.paymentsList.push(data);
+    },
+    handleShow(){
+      this.show = !this.show
     }
-  }
-}
+  },
+};
+</script>
+
+<style>
 </style>
