@@ -27,24 +27,8 @@ export default {
   },
   data() {
     return {
+      paymentsList: [],
       show: false,
-      paymentsList: [
-        {
-          date: "08.02.22",
-          category: "Education",
-          price: 123,
-        },
-        {
-          date: "10.02.22",
-          category: "Sport",
-          price: 325,
-        },
-        {
-          date: "13.03.22",
-          category: "Learning",
-          price: 900,
-        },
-      ],
     };
   },
   methods: {

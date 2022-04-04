@@ -3,12 +3,14 @@
     <input placeholder="Date" v-model="date" />
     <input placeholder="Category" v-model="category" />
     <input placeholder="Price" v-model="price" />
-    <button @click="save">Save</button>
+    <button-v msg="Добавить" @watch="save" />
   </div>
 </template>
 
 <script>
+import ButtonV from './ButtonV.vue';
 export default {
+  components: { ButtonV },
   data() {
     return {
       date: "",
@@ -18,11 +20,46 @@ export default {
     };
   },
   methods: {
-    save() {
-      const { date, category, price } = this;
-      this.$emit("add", { date, category, price });
+    getCurrenDate(){
+      const dates = new Date();
+      const d = dates.getDate();
+      const m = dates.getMonth();
+      const y = dates.getFullYear();
+      return `${d}.${m}.${y}`
     },
+    save() {
+      // const { date, category, price } = this;
+      const data = {
+        date: this.date || this.getCurrenDate(),
+        category: this.category,
+        price: this.price
+      }
+      // this.$emit("add", { date, category, price });
+      this.$emit('add', data)
+    },
+    fetchData() {
+      return [
+        {
+          date: '13.01.18',
+          category: 'Education',
+          price: '180'
+        },
+        {
+          date: '18.01.18',
+          category: 'food',
+          price: '250'
+        },
+        {
+          date: '25.02.18',
+          category: 'sport',
+          price: '190'
+        }
+      ]
+    }
   },
+  mounted(){
+    this.$store.commit(`setPaymentsListData`, this.fetchData())
+  }
 };
 </script>
 
