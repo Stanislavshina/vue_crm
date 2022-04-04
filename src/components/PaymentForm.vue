@@ -1,7 +1,10 @@
 <template>
   <div>
     <input placeholder="Date" v-model="date" />
-    <input placeholder="Category" v-model="category" />
+    <!-- <input placeholder="Category" v-model="category" /> -->
+    <select name="" id="">
+      <option v-for="cat of getCategorysList" :key="cat">{{cat}}</option>
+    </select>
     <input placeholder="Price" v-model="price" />
     <button-v msg="Добавить" @watch="save" />
   </div>
@@ -9,6 +12,7 @@
 
 <script>
 import ButtonV from './ButtonV.vue';
+import {mapGetters} from "vuex";
 export default {
   components: { ButtonV },
   data() {
@@ -18,6 +22,11 @@ export default {
       price: 0,
       
     };
+  },
+  computed: {
+    ...mapGetters([
+      'getCategorysList'
+    ]),
   },
   methods: {
     getCurrenDate(){

@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchData'
+      'fetchData',
+      'fetchCategorys'
     ]),
     onDataAdded(data) {
       console.log(data);
@@ -48,6 +49,7 @@ export default {
   },
   mounted(){
     this.fetchData()
+    this.fetchCategorys()
   }
 };
 </script>
