@@ -10,6 +10,7 @@ export default new Vuex.Store({
   },
   getters: {
     getPaymentsList: state => state.paymentsList,
+    getCategorysList: state => state.categorysList,
     getFullPrice: state => {
       return state.paymentsList.reduce((res, cur) => res + cur.price, 0)
     }
