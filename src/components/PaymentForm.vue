@@ -37,29 +37,7 @@ export default {
       // this.$emit("add", { date, category, price });
       this.$emit('add', data)
     },
-    fetchData() {
-      return [
-        {
-          date: '13.01.18',
-          category: 'Education',
-          price: '180'
-        },
-        {
-          date: '18.01.18',
-          category: 'food',
-          price: '250'
-        },
-        {
-          date: '25.02.18',
-          category: 'sport',
-          price: '190'
-        }
-      ]
-    }
   },
-  mounted(){
-    this.$store.commit(`setPaymentsListData`, this.fetchData())
-  }
 };
 </script>
 

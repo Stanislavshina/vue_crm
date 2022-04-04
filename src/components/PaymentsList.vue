@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(i,indx) of items" :key="indx">
+        <tr v-for="(i,indx) of getPaymentsList" :key="indx">
           <td>{{indx}}</td>
           <td>{{i.date}}</td>
           <td>{{i.category}}</td>
@@ -30,16 +30,15 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 export default {
-  props: {
-    items: Array,
+  computed:{
+...mapGetters([
+  'getPaymentsList'
+])
   },
-  methods: {
-    showLog() {
-      console.log(items);
-    },
-  },
-};
+  methods: {}
+}
 </script>
 
 <style lang="scss" module>

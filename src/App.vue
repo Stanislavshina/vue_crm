@@ -10,7 +10,7 @@
     <template v-if="show">
     <payment-form @add="onDataAdded" />
     </template>
-    <paymentsList :items="paymentsList" />
+    <paymentsList  />
   </div>
 </template>
 
@@ -18,8 +18,9 @@
 import ButtonV from "./components/ButtonV.vue"
 import paymentsList from "./components/PaymentsList.vue";
 import PaymentForm from "./components/PaymentForm.vue";
+import {mapActions} from "vuex";
 export default {
-  name: "#App",
+  name: "App",
   components: {
     paymentsList,
     PaymentForm,
@@ -27,19 +28,27 @@ export default {
   },
   data() {
     return {
-      paymentsList: [],
       show: false,
     };
   },
+  computed:{
+    
+  },
   methods: {
+    ...mapActions([
+      'fetchData'
+    ]),
     onDataAdded(data) {
       console.log(data);
-      this.paymentsList.push(data);
+      this.$store.state.paymentsList.push(data)
     },
     handleShow(){
       this.show = !this.show
-    }
+    },
   },
+  mounted(){
+    this.fetchData()
+  }
 };
 </script>
 
