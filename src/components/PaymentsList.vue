@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(i,indx) of getPaymentsList" :key="indx">
+        <tr v-for="(i,indx) in currentElements" :key="indx">
           <td>{{indx}}</td>
           <td>{{i.date}}</td>
           <td>{{i.category}}</td>
@@ -18,6 +18,7 @@
         </tr>
       </tbody>
     </table>
+    <pagination :length="getPaymentsList.length" :n="n" :cur="page" @paginate="onPaginate"/>
     <!-- <ul>
       <li v-for="(i, indx) in items" :key="indx">
         <div>{{indx}}</div>
@@ -31,13 +32,29 @@
 
 <script>
 import {mapGetters} from "vuex";
+import pagination from './pagination.vue';
 export default {
+  components: { pagination },
+  data(){
+    return {
+      page: 1,
+      n: 3
+    }
+  },
   computed:{
 ...mapGetters([
   'getPaymentsList'
-])
+]),
+currentElements(){
+  const { n, page } = this
+      return this.getPaymentsList.slice(n * (page - 1), n * (page - 1) + n)
+}
   },
-  methods: {}
+  methods: {
+    onPaginate (p) {
+      this.page = p
+    }
+  },
 }
 </script>
 
