@@ -2,8 +2,8 @@
   <div>
     <input placeholder="Date" v-model="date" />
     <!-- <input placeholder="Category" v-model="category" /> -->
-    <select name="" id="">
-      <option v-for="cat of getCategorysList" :key="cat">{{cat}}</option>
+    <select name="" id="rs" v-model="category">
+      <option v-for="(i) of getCategorysList" :key="i">{{i}}</option>
     </select>
     <input placeholder="Price" v-model="price" />
     <button-v msg="Добавить" @watch="save" />
@@ -18,9 +18,9 @@ export default {
   data() {
     return {
       date: "",
-      category: "",
       price: 0,
-      
+      category: "",
+      addNewCategory: "",
     };
   },
   computed: {
@@ -36,6 +36,7 @@ export default {
       const y = dates.getFullYear();
       return `${d}.${m}.${y}`
     },
+    
     save() {
       // const { date, category, price } = this;
       const data = {
@@ -43,7 +44,7 @@ export default {
         category: this.category,
         price: this.price
       }
-      // this.$emit("add", { date, category, price });
+      // this.$emit("add", { date, category, price })
       this.$emit('add', data)
     },
   },
@@ -55,12 +56,20 @@ div{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   margin-bottom: 15px;
   max-width: 520px;
   width: 100%;
 }
 input {
-  width: 500px;
+  width: 200px;
+  padding: 7px 15px;
+  margin-bottom: 7px;
+  border: 3px solid rgb(47, 97, 8);
+  border-radius: 15px;
+}
+select{
+  width: 235px;
   padding: 7px 15px;
   margin-bottom: 7px;
   border: 3px solid rgb(47, 97, 8);
@@ -69,7 +78,7 @@ input {
 
 button {
   // width: 300px;
-  margin: 0 auto;
+  // margin: 0 auto;
   background-color: rgb(82, 151, 30);
   border: none;
   padding: 7px 75px;
@@ -80,5 +89,10 @@ button {
   letter-spacing: 1.5px;
   color: rgb(0, 0, 0);
 
+}
+.one{
+ padding: 7px 25px;
+ background-color: rgb(0, 52, 55);
+ color: rgb(255, 251, 0);
 }
 </style>

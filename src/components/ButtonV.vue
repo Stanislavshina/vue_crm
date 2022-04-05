@@ -19,7 +19,7 @@ export default {
 
 <style scoped lang="scss">
 button {
-  margin: 0 auto;
+//   margin: 0 auto;
   background-color: rgb(82, 151, 30);
   border: none;
   padding: 7px 75px;
@@ -30,5 +30,6 @@ button {
   letter-spacing: 1.5px;
   color: rgb(0, 0, 0);
   margin-bottom: 15px;
+  cursor: pointer;
 }
 </style>
