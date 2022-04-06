@@ -1,14 +1,17 @@
 <template>
   <div :class="[$style.wrp]">
-    <div @click="onClick(cur - 1)">-</div>
+    <div @click="onClick(cur - 1)"
+    class="pagBtn">-</div>
     <div
+    class="pagBtn"
       v-for="i in amount" :key="i"
       :class="{
         [$style.active]: cur === i
       }"
       @click="onClick(i)"
     >{{ i }}</div>
-    <div @click="onClick(cur + 1)">+</div>
+    <div @click="onClick(cur + 1)"
+    class="pagBtn">+</div>
   </div>
 </template>
 
@@ -37,12 +40,18 @@ export default {
 
 <style module lang="scss">
 .wrp {
+  margin-top: 15px;
   display: flex;
   & > div {
-    padding: 10px;
+    padding: 5px;
+    border-radius: 30px;
+    cursor: pointer;
+    
     &.active {
-      background: #ccc;
+      background: rgb(82, 151, 30);
+      color: rgb(255, 208, 0);
     }
   }
 }
+
 </style>

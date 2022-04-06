@@ -3,6 +3,7 @@
     <header class="header">
       <h1>My personal coasts</h1>
     </header>
+    <category-form/>
     <ButtonV 
     msg="Show paymentform"
     @watch="handleShow"
@@ -19,12 +20,14 @@ import ButtonV from "./components/ButtonV.vue"
 import paymentsList from "./components/PaymentsList.vue";
 import PaymentForm from "./components/PaymentForm.vue";
 import {mapActions} from "vuex";
+import CategoryForm from './components/CategoryForm.vue';
 export default {
   name: "App",
   components: {
     paymentsList,
     PaymentForm,
     ButtonV,
+    CategoryForm
   },
   data() {
     return {

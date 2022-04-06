@@ -38,7 +38,7 @@ export default {
   data(){
     return {
       page: 1,
-      n: 3
+      n: 10
     }
   },
   computed:{
