@@ -1,59 +1,31 @@
 <template>
   <div id="App">
-    <header class="header">
-      <h1>My personal coasts</h1>
+    <header>
+      <router-link to="/Dashboard">Dashboard</router-link>
+      <router-link to="/about">about</router-link>
+      <router-link to="/page-404">not found</router-link>
     </header>
-    <category-form/>
-    <ButtonV 
-    msg="Show paymentform"
-    @watch="handleShow"
-    />
-    <template v-if="show">
-    <payment-form @add="onDataAdded" />
-    </template>
-    <paymentsList  />
+    <main>
+      <router-view/>
+    </main>
   </div>
 </template>
 
 <script>
-import ButtonV from "./components/ButtonV.vue"
-import paymentsList from "./components/PaymentsList.vue";
-import PaymentForm from "./components/PaymentForm.vue";
-import {mapActions} from "vuex";
-import CategoryForm from './components/CategoryForm.vue';
 export default {
   name: "App",
   components: {
-    paymentsList,
-    PaymentForm,
-    ButtonV,
-    CategoryForm
   },
   data() {
     return {
-      show: false,
     };
   },
   computed:{
     
   },
   methods: {
-    ...mapActions([
-      'fetchData',
-      'fetchCategorys'
-    ]),
-    onDataAdded(data) {
-      console.log(data);
-      this.$store.state.paymentsList.push(data)
-    },
-    handleShow(){
-      this.show = !this.show
-    },
   },
-  mounted(){
-    this.fetchData()
-    this.fetchCategorys()
-  }
+  
 };
 </script>
 

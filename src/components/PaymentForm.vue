@@ -48,6 +48,14 @@ export default {
       this.$emit('add', data)
     },
   },
+  mounted() {
+    if(this.$route.params.category){
+      this.date = this.getCurrenDate();
+      this.category = this.$route.params.category;
+      this.price = Number(this.$route.query?.price) || 0
+    }
+    console.log(this.$route);
+  }
 };
 </script>
 
