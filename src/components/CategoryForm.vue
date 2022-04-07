@@ -11,7 +11,7 @@ export default {
   components: { ButtonV },
 data(){
    return {
-      newCategory: ""
+      newCategory: null
    }
 },
 methods: {
@@ -19,6 +19,7 @@ methods: {
       data = this.newCategory;
       console.log(data);
       this.$store.state.categorysList.push(data)
+      this.newCategory = null;
 
    }
 }

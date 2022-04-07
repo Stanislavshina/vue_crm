@@ -1,60 +1,47 @@
 <template>
   <div id="App">
     <header class="header">
-      <h1>My personal coasts</h1>
+      <a href="#Dashboard">Dashboard</a>
+      <a href="#About">About</a>
+      <a href="#page-404">404</a>
     </header>
-    <category-form/>
-    <ButtonV 
-    msg="Show paymentform"
-    @watch="handleShow"
-    />
-    <template v-if="show">
-    <payment-form @add="onDataAdded" />
-    </template>
-    <paymentsList  />
+    <main>
+      <dashboard v-if="page == 'Dashboard'"/>
+      <about-view v-if="page === 'About'"/>
+      <page-404 v-if="page === 'page-404'"/>
+    </main>
   </div>
 </template>
 
 <script>
-import ButtonV from "./components/ButtonV.vue"
-import paymentsList from "./components/PaymentsList.vue";
-import PaymentForm from "./components/PaymentForm.vue";
-import {mapActions} from "vuex";
-import CategoryForm from './components/CategoryForm.vue';
+import AboutView from './views/AboutView.vue';
+import Dashboard from './views/Dashboard.vue';
+import Page404 from './views/Page-404.vue';
+
 export default {
   name: "App",
   components: {
-    paymentsList,
-    PaymentForm,
-    ButtonV,
-    CategoryForm
+    Dashboard,
+    AboutView,
+    Page404
   },
   data() {
     return {
-      show: false,
+      page: null
     };
   },
-  computed:{
-    
-  },
-  methods: {
-    ...mapActions([
-      'fetchData',
-      'fetchCategorys'
-    ]),
-    onDataAdded(data) {
-      console.log(data);
-      this.$store.state.paymentsList.push(data)
-    },
-    handleShow(){
-      this.show = !this.show
-    },
+  methods:{
+    setPage(){
+      this.page= location.hash.slice(1)
+    }
   },
   mounted(){
-    this.fetchData()
-    this.fetchCategorys()
+    this.setPage()
+    window.addEventListener('hashchange',()=>{
+      this.setPage()
+    })
   }
-};
+}
 </script>
 
 <style>
