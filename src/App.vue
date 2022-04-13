@@ -1,32 +1,62 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div id="App">
+    <header>
+      <router-link to="/Dashboard">Dashboard</router-link>
+      <router-link to="/about">about</router-link>
+      <router-link to="/page-404">not found</router-link>
+    </header>
+    <main>
+      <router-view/>
+      <transition name="fade">
+      <modal v-if="modalShown" :name="modalShown"/>
+      </transition>
+      <context-menu/>
+    </main>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import ContextMenu from './components/modalWindows/ContextMenu.vue';
+// import Modal from './components/modalWindows/Modal.vue';
+export default {
+  name: "App",
+  components: {
+    Modal: ()=> import('./components/modalWindows/Modal.vue'),
+    ContextMenu
+  },
+  data() {
+    return {
+      modalShown: false
+    };
+  },
+  computed:{
+    
+  },
+  methods: {
+    onShown(name){
+      this.modalShown = name
+    },
+    onClose(){
+      this.modalShown = false
     }
+  },
+  mounted(){
+    console.log(this.$modal);
+    this.$modal.EventBus.$on('show', this.onShown)
+    this.$modal.EventBus.$on('close', this.onClose)
+  },
+  beforeDestroy(){
+    this.$modal.EventBus.$off('show', this.onShown)
+    this.$modal.EventBus.$off('close', this.onClose)
   }
+};
+</script>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
