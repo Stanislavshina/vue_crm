@@ -15,17 +15,22 @@ import ButtonV from './ButtonV.vue';
 import {mapGetters} from "vuex";
 export default {
   components: { ButtonV },
+  props: {
+    i: Object
+  },
   data() {
     return {
       date: "",
       price: 0,
       category: "",
       addNewCategory: "",
+      id: 4
     };
   },
   computed: {
     ...mapGetters([
-      'getCategorysList'
+      'getCategorysList',
+      'getPaymentsList'
     ]),
   },
   methods: {
@@ -40,6 +45,7 @@ export default {
     save() {
       // const { date, category, price } = this;
       const data = {
+        id: this.id++,
         date: this.date || this.getCurrenDate(),
         category: this.category,
         price: this.price
@@ -54,7 +60,15 @@ export default {
       this.category = this.$route.params.category;
       this.price = Number(this.$route.query?.price) || 0
     }
-    console.log(this.$route);
+    // console.log(this.$route);
+    if(this.i){
+      const items = this.getPaymentsList.find(p => p.i === this.i)
+      if(item){
+        this.date = item.date
+        this.category = item.category
+        this.price = item.price
+      }
+    }
   }
 };
 </script>

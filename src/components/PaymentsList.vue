@@ -11,22 +11,28 @@
       </thead>
       <tbody>
         <tr v-for="(i,indx) in currentElements" :key="indx">
-          <td>{{indx}}</td>
+          <td>{{i.id}}</td>
           <td>{{i.date}}</td>
           <td>{{i.category}}</td>
           <td>{{i.price}}</td>
+          <td @click="onContextMenuClick($event, i)">...</td>
         </tr>
-      </tbody>
-    </table>
-    <pagination :length="getPaymentsList.length" :n="n" :cur="page" @paginate="onPaginate"/>
-    <!-- <ul>
-      <li v-for="(i, indx) in items" :key="indx">
+        
+         <!-- <ul>
+      <li v-for="(i, indx) in currentElements" :key="indx">
         <div>{{indx}}</div>
         <div>{{i.date}}</div>
         <div>{{i.category}}</div>
         <div>{{i.price}}</div>
+        <div @click=consoleAll(i)>x</div>
       </li>
     </ul> -->
+        
+      </tbody>
+    </table>
+    
+    <pagination :length="getPaymentsList.length" :n="n" :cur="page" @paginate="onPaginate"/>
+    <button @click="lookAtMe">Show</button>
   </div>
 </template>
 
@@ -34,7 +40,7 @@
 import {mapGetters} from "vuex";
 import pagination from './pagination.vue';
 export default {
-  components: { pagination },
+  components: { pagination},
   data(){
     return {
       page: 1,
@@ -53,8 +59,24 @@ currentElements(){
   methods: {
     onPaginate (p) {
       this.page = p
-    }
+    },
+    lookAtMe(){
+      this.$modal.show('paymentForm')
+    },
+    deleteItems(i){
+      this.$store.state.paymentsList = this.$store.state.paymentsList.filter(t=> t != i)
+    },
+    onContextMenuClick(event, i){
+      this.$context.show(event, [
+        {text: 'Delete', action: ()=>{this.deleteItems(i)}},
+        {text: 'Edit', action: ()=>{this.$modal.show('paymentForm', i)}}
+      ])
+    },
+
   },
+  mounted(){
+    
+  }
 }
 </script>
 

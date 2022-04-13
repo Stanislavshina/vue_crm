@@ -29,18 +29,21 @@ export default new Vuex.Store({
         setTimeout(()=>{
           resolve([
               {
+                id: 1,
                 date: '13.01.18',
-                category: 'Education',
+                category: 'Образование',
                 price: 180
               },
               {
+                id: 2,
                 date: '18.01.18',
-                category: 'food',
+                category: 'Еда',
                 price: 250
               },
               {
+                id: 3,
                 date: '25.02.18',
-                category: 'sport',
+                category: 'Спорт',
                 price: 190
               }
           ])

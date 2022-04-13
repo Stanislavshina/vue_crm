@@ -11,7 +11,7 @@
     <template v-if="show">
     <payment-form @add="onDataAdded" />
     </template>
-    <paymentsList  />
+    <paymentsList />
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
       'fetchCategorys'
     ]),
     onDataAdded(data) {
-      console.log(data);
+      //console.log(data);
       this.$store.state.paymentsList.push(data)
     },
     handleShow(){

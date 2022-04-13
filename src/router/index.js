@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '../views/PageDashboard.vue'
-import About from '../views/AboutView.vue'
-import Page404 from '../views/Page404.vue'
+// import Dashboard from '../views/PageDashboard.vue'
+// import About from '../views/AboutView.vue'
+// import Page404 from '../views/Page404.vue'
 
 Vue.use(VueRouter)
 
@@ -12,22 +12,22 @@ export default new VueRouter({
     {
       path: '/Dashboard',
       name: 'Dashboard',
-      component: Dashboard
+      component: ()=> import('../views/PageDashboard.vue')
     },
     {
       path: '/Dashboard/add/payment/:category',
-      name: 'Dashboard',
-      component: Dashboard
+      name: 'Dashboards',
+      component: ()=> import('../views/PageDashboard.vue')
     },
     {
       path: '/about',
       name: 'About',
-      component: About
+      component: ()=> import('../views/AboutView.vue')
     },
     {
       path: '*',
       name: 'NotFound',
-      component: Page404
+      component: ()=> import('../views/Page404.vue')
     },
     
   ]
