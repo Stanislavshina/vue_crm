@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <input v-model.number="operand1" />
-    <input v-model.number="operand2" />
+    <input v-model.number="operand1" name="operand1"/>
+    <input v-model.number="operand2" name="operand2"/>
     = {{ result }}
-    <button v-for="op in operations" :key="op" @click="mathOp(op)">
+    <button v-for="op in operations" :key="op" @click="mathOp(op)" :name="op">
       {{ op }}
     </button>
     <div class="error" v-if="error">
@@ -12,20 +12,20 @@
     </div>
 
     <label>
-      <input type="checkbox" @click="show = !show" />
+      <input type="checkbox" @click="show = !show" name="show"/>
       Display board
     </label>
-    <div v-if="show">
-      <button v-for="num in numbers" :key="num" @click="inputNum(num)">
+    <div v-show="show">
+      <button v-for="num in numbers" :key="num" @click="inputNum(num)" :name="num">
         {{ num }}
       </button>
-      <button @click="deleteLast">DELETE</button>
+      <button @click="deleteLast" name="delLast">DELETE</button>
       <label>
-        <input name="ops" type="radio" v-model="operand" value="1" />
+        <input name="ops1" type="radio" v-model="operand" value="1" />
         op1
       </label>
       <label>
-        <input name="ops" type="radio" v-model="operand" value="2" />
+        <input name="ops2" type="radio" v-model="operand" value="2" />
         op2
       </label>
     </div>
