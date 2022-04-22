@@ -25,7 +25,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchData({commit}) {
-      return new Promise((resolve, reject)=>{
+      return new Promise((resolve)=>{
         setTimeout(()=>{
           resolve([
               {
@@ -54,7 +54,7 @@ export default new Vuex.Store({
       })
     },
     fetchCategorys({commit}) {
-      return new Promise((resolve,reject)=>{
+      return new Promise((resolve)=>{
         resolve([
           'Расходы на детей',
           'Еда',

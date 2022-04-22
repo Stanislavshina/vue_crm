@@ -25,9 +25,14 @@ export default new VueRouter({
       component: ()=> import('../views/AboutView.vue')
     },
     {
+      path: '/calc',
+      name: 'Calculate',
+      component: ()=> import('../components/Calc.vue')
+    },
+    {
       path: '*',
       name: 'NotFound',
-      component: ()=> import('../views/Page404.vue')
+      component: ()=> import('../views/PageUngound.vue')
     },
     
   ]

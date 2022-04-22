@@ -4,6 +4,7 @@
       <router-link to="/Dashboard">Dashboard</router-link>
       <router-link to="/about">about</router-link>
       <router-link to="/page-404">not found</router-link>
+      <router-link to="/calc">Calc</router-link>
     </header>
     <main>
       <router-view/>
@@ -21,7 +22,7 @@ import ContextMenu from './components/modalWindows/ContextMenu.vue';
 export default {
   name: "App",
   components: {
-    Modal: ()=> import('./components/modalWindows/Modal.vue'),
+    Modal: ()=> import('./components/modalWindows/ModalWidow.vue'),
     ContextMenu
   },
   data() {

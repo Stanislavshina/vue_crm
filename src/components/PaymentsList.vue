@@ -38,7 +38,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import pagination from './pagination.vue';
+import pagination from './paginationComponent.vue';
 export default {
   components: { pagination},
   data(){

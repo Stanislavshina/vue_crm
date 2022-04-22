@@ -63,10 +63,10 @@ export default {
     // console.log(this.$route);
     if(this.i){
       const items = this.getPaymentsList.find(p => p.i === this.i)
-      if(item){
-        this.date = item.date
-        this.category = item.category
-        this.price = item.price
+      if(items){
+        this.date = items.date
+        this.category = items.category
+        this.price = items.price
       }
     }
   }

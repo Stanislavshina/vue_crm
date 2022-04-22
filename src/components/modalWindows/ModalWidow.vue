@@ -12,9 +12,7 @@ import PaymentForm from '../PaymentForm.vue'
 export default {
   components: { PaymentForm },
   props:{
-     modal: String
-  },
-  props:{
+     modal: String,
     name: String,
     settings: Object
   },
