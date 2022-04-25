@@ -1,22 +1,15 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <clicker-button />
-    <clicker-button />
-    <clicker-button />
-    <clicker-button />
-  </div>
+  <hello-world />
 </template>
 
 <script>
-// @ is an alias to /src
-import ClickerButton from "../components/Clicker-button.vue";
+  import HelloWorld from '../components/HelloWorld'
 
-export default {
-  name: "HomeView",
-  components: {
-    ClickerButton,
-  },
-};
+  export default {
+    name: 'Home-view',
+
+    components: {
+      HelloWorld,
+    },
+  }
 </script>
