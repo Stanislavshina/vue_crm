@@ -1,39 +1,23 @@
 <template>
-  <div>
-    <table>
-      <thead>
-        <tr>
-        <th>#</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Цена</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(i,indx) in currentElements" :key="indx">
-          <td>{{i.id}}</td>
-          <td>{{i.date}}</td>
-          <td>{{i.category}}</td>
-          <td>{{i.price}}</td>
-          <td @click="onContextMenuClick($event, i)">...</td>
-        </tr>
-        
-         <!-- <ul>
-      <li v-for="(i, indx) in currentElements" :key="indx">
-        <div>{{indx}}</div>
-        <div>{{i.date}}</div>
-        <div>{{i.category}}</div>
-        <div>{{i.price}}</div>
-        <div @click=consoleAll(i)>x</div>
-      </li>
-    </ul> -->
-        
-      </tbody>
-    </table>
-    
+<v-container>
+    <v-row>
+      <v-col :cols="1">#</v-col>
+      <v-col :cols="2">Дата</v-col>
+      <v-col :cols="2">Категория</v-col>
+      <v-col :cols="2">Цена</v-col>
+    </v-row>
+    <v-row v-for="(i,indx) in currentElements" :key="indx">
+      <v-col :cols="1">{{i.id}}</v-col>
+      <v-col :cols="2">{{i.date}}</v-col>
+      <v-col :cols="3">{{i.category}}</v-col>
+      <v-col :cols="3">{{i.price}} Руб.</v-col>
+      <v-btn  fab text
+      @click="deleteItems(i)" :cols="1"><v-icon>mdi-close-circle</v-icon></v-btn>
+    </v-row>
     <pagination :length="getPaymentsList.length" :n="n" :cur="page" @paginate="onPaginate"/>
-    <button @click="lookAtMe">Show</button>
-  </div>
+    </v-container>
+    
+  
 </template>
 
 <script>
@@ -65,8 +49,10 @@ currentElements(){
     },
     deleteItems(i){
       this.$store.state.paymentsList = this.$store.state.paymentsList.filter(t=> t != i)
+      this.$store.state.paymentsList.id--
     },
     onContextMenuClick(event, i){
+      console.log(i);
       this.$context.show(event, [
         {text: 'Delete', action: ()=>{this.deleteItems(i)}},
         {text: 'Edit', action: ()=>{this.$modal.show('paymentForm', i)}}

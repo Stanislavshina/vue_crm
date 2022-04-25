@@ -1,17 +1,45 @@
 <template>
-  <div class="">
-     <input type="text" v-model="newCategory">
-     <button-v msg="добавить категорию" @watch="addCategory"/>
-  </div>
+<v-container
+    id="input-usage"
+    fluid
+  >
+    <v-row
+    justify="start"
+    align-content="start">
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+         <v-text-field
+            label="Добавить Категорию"
+            v-model="newCategory"
+         ></v-text-field>
+         
+        </v-col>
+        <v-btn
+      class="mx-2"
+      fab
+      dark
+      color="indigo"
+      @click="addCategory"
+    >
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
+         </v-btn>
+    </v-row>
+  </v-container>
+
 </template>
 
 <script>
-import ButtonV from './ButtonV.vue'
+// import ButtonV from './ButtonV.vue'
 export default {
-  components: { ButtonV },
+//   components: { ButtonV },
 data(){
    return {
-      newCategory: ""
+      newCategory: "",
    }
 },
 methods: {
@@ -19,12 +47,17 @@ methods: {
       data = this.newCategory;
       console.log(data);
       this.$store.state.categorysList.push(data)
+      this.newCategory = ''
 
    }
 }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.text-field{
+   input{
+   width: 250px;
+}
+}
 </style>

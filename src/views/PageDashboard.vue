@@ -1,33 +1,54 @@
 <template>
-  <div id="App">
-    <header class="header">
-      <h1>My personal coasts</h1>
-    </header>
-    <category-form/>
-    <ButtonV 
-    msg="Show paymentform"
-    @watch="handleShow"
-    />
-    <template v-if="show">
-    <payment-form @add="onDataAdded" />
-    </template>
-    <paymentsList />
-  </div>
+<v-container>
+  <v-row>
+    <v-col>
+      <category-form/>
+      <v-row
+      align-content="start"
+      justify="start">
+      <v-btn @click="handleShow">Add new cost <v-icon>mdi-plus</v-icon></v-btn>
+      <template v-if="show">
+      <payment-form @add="onDataAdded" />
+      </template>
+      </v-row>
+      <paymentsList />
+    </v-col>
+    <v-col>
+      <chart-pie :items="getPaymentsList"/>
+    </v-col>
+  </v-row>
+</v-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 </template>
 
 <script>
-import ButtonV from "../components/ButtonV.vue"
 import paymentsList from "../components/PaymentsList.vue";
 import PaymentForm from "../components/PaymentForm.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import { Pie } from 'vue-chartjs';
 import CategoryForm from '../components/CategoryForm.vue';
+import ChartPie from '@/components/chart-pie.vue';
 export default {
   name: "App",
+  extends: Pie,
   components: {
     paymentsList,
     PaymentForm,
-    ButtonV,
-    CategoryForm
+    CategoryForm,
+    ChartPie
   },
   data() {
     return {
@@ -35,7 +56,7 @@ export default {
     };
   },
   computed:{
-    
+    ...mapGetters(['getPaymentsList'])
   },
   methods: {
     ...mapActions([
